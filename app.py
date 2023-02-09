@@ -36,9 +36,9 @@ def upload_file(f):
         logging.error(e)
         return 'Failed to upload file'
 
-# @app.route('/')
-# def hello():
-#     return '<h1>Hello, World!</h1>'
+@app.route('/')
+def hello():
+    return '<h1>Hello, World!</h1>'
 
 @app.route('/home')
 def home():
