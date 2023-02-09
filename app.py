@@ -24,7 +24,7 @@ def upload_file(f):
     # Upload the file
     s3_client = boto3.client('s3', 
                              aws_access_key_id=os.environ['aws_access_key_id'], 
-                             aws_secret_access_key=os.environ['aws_secret_access_key']'])
+                             aws_secret_access_key=os.environ['aws_secret_access_key'])
     try:
         response = s3_client.upload_file(file_name, 'assyst-testing', f"test/{file_name}")
         return response
@@ -47,4 +47,4 @@ def upload():
     return upload_file(f)
     
 if __name__ == '__main__':
-   app.run(host='0.0.0.0')
+   app.run()
