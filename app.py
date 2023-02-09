@@ -46,5 +46,5 @@ def upload():
     f = request.files['file']
     return upload_file(f)
     
-if __name__ == '__main__':
-   app.run()
+# if __name__ == '__main__':
+#    app.run()
