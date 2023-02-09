@@ -22,7 +22,9 @@ def upload_file(f):
     file_name = secure_filename(f.filename)
 
     # Upload the file
-    s3_client = boto3.client('s3')
+    s3_client = boto3.client('s3', 
+                             aws_access_key_id=os.environ['aws_access_key_id'], 
+                             aws_secret_access_key=os.environ['aws_secret_access_key']'])
     try:
         response = s3_client.upload_file(file_name, 'assyst-testing', f"test/{file_name}")
         return response
