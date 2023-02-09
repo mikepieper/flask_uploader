@@ -27,7 +27,7 @@ def upload_file(f):
                              aws_secret_access_key=os.environ['aws_secret_access_key'])
     try:
         response = s3_client.upload_file(file_name, 'assyst-testing', f"test/{file_name}")
-        return response
+        return f"assyst-testing/test/{file_name}"
     except ClientError as e:
         logging.error(e)
         return 'Failed to upload file'
