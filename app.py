@@ -9,6 +9,10 @@ import os
 app = Flask(__name__)
 
 
+# Upload file to s3 bucket function
+
+
+
 def upload_file(f):
     """Upload a file to an S3 bucket
 
@@ -26,7 +30,7 @@ def upload_file(f):
                              aws_access_key_id=os.environ['aws_access_key_id'], 
                              aws_secret_access_key=os.environ['aws_secret_access_key'])
     try:
-        response = s3_client.upload_file(file_name, 'assyst-testing', f"test/{file_name}")
+        response = s3_client.upload_fileobj(f, 'assyst-testing', f"test/{file_name}")
         return f"assyst-testing/test/{file_name}"
     except ClientError as e:
         logging.error(e)
