@@ -31,7 +31,6 @@ def upload_file(f):
     except ClientError as e:
         logging.error(e)
         return 'Failed to upload file'
-    return f"assyst-testing/test/{file_name}"
 
 # @app.route('/')
 # def hello():
