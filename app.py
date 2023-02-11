@@ -5,6 +5,7 @@ from mimetypes import MimeTypes
 import boto3
 from botocore.exceptions import ClientError
 import os
+import uuid
 
 app = Flask(__name__)
 
@@ -24,14 +25,15 @@ def upload_file(f):
 
     # If S3 object_name was not specified, use file_name
     file_name = secure_filename(f.filename)
+    new_file_name = f"{uuid.uuid4()}.mp4"
 
     # Upload the file
     s3_client = boto3.client('s3', 
                              aws_access_key_id=os.environ['aws_access_key_id'], 
                              aws_secret_access_key=os.environ['aws_secret_access_key'])
     try:
-        response = s3_client.upload_fileobj(f, 'assyst-testing', f"test/{file_name}")
-        return f"assyst-testing/test/{file_name}"
+        response = s3_client.upload_fileobj(f, 'assyst-testing', f"test/{new_file_name}")
+        return f"{file_name} saved to s3://assyst-testing/test/{new_file_name}"
     except ClientError as e:
         logging.error(e)
         return 'Failed to upload file'
