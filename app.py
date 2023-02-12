@@ -33,10 +33,17 @@ def upload_file(f):
                              aws_secret_access_key=os.environ['aws_secret_access_key'])
     try:
         response = s3_client.upload_fileobj(f, 'assyst-testing', f"test/{new_file_name}")
-        return f"s3://assyst-testing/test/{new_file_name}"
+        return {
+            "success": True,
+            "video": f"s3://assyst-testing/test/{new_file_name}",
+        }
+            
     except ClientError as e:
         logging.error(e)
-        return 'Failed to upload file'
+        return {
+            "success": False,
+            "explanation": 'Failed to upload file'
+        }
 
 @app.route('/')
 def hello():
