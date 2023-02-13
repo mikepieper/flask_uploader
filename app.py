@@ -35,7 +35,7 @@ def upload_file(f):
         response = s3_client.upload_fileobj(f, 'assyst-testing', f"test/{new_file_name}")
         return {
             "success": True,
-            "video": f"s3://assyst-testing/test/{new_file_name}",
+            "video": f"https://assyst-testing.s3.amazonaws.com/test/{new_file_name}",
         }
             
     except ClientError as e:
